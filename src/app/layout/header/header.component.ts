@@ -6,13 +6,18 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
-
+  
+  username:string = "El usuario";
   constructor() { }
 
   ngAfterViewInit():void {
     
   }
   ngOnInit(): void {
+  }
+  logOut()
+  {
+    alert("Cerrando sesion");
   }
 
 }
