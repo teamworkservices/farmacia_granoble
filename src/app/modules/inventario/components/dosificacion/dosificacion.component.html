@@ -4,7 +4,16 @@
       <span>/ Dosificación</span>
     </mat-toolbar>
 </div>
+<!--BOTON AGREGAR-->
+<mat-toolbar>
+  <button (click)="openCreateDialog()" mat-raised-button>
+    <mat-icon>add_circle_outline</mat-icon>
+    AGREGAR
+  </button>
+</mat-toolbar>
 
+
+<!--TABLA-->
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="id">
