@@ -6,21 +6,18 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
-
-
+import { ReactiveFormsModule  } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    
-    
-    
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MatGridListModule,
-    BrowserAnimationsModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
