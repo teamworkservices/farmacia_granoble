@@ -25,7 +25,16 @@ export class DosificacionService {
   //agregarDosificacion(dosificacion: Dosificacion):Observable<Dosificacion> {
   agregarDosificacion(dosificacion: Dosificacion):Dosificacion {
     //return this.http.post<Dosificacion>(environment.urlServer+'dosificacion/agregar', dosificacion);
-    dosificacion.id = this.dosificacionData.length+1;
+    if(this.dosificacionData.length==0)
+    {
+      dosificacion.id= this.dosificacionData.length+1;
+    }else{
+      let pos : number;
+      pos= this.dosificacionData[this.dosificacionData.length-1].id;
+      dosificacion.id = pos +1;
+     
+    }
+
     this.dosificacionData.push(dosificacion);
     return dosificacion;
   }

@@ -17,7 +17,7 @@ export class DosificacionComponent implements OnInit {
   dosificacionesData: Dosificacion[] = [];
   displayedColumns: string[] = ['id', 'nombre', 'codigo', 'acciones'];
 
-  dataSource!: MatTableDataSource<Dosificacion>
+  dataSource!: MatTableDataSource<Dosificacion>//para mostrar la info que tenemos
   
   constructor(public dialog: MatDialog, public dosificacionService:DosificacionService) {
     
