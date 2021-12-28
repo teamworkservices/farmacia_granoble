@@ -7,9 +7,9 @@ import { Medicamentos } from 'src/app/shared/models/medicamentos';
 export class MedicamentosService {
 
   MedicamentosData: Medicamentos[] = [
-    {idMedicamento: 1, codigoCompraMedicamentos: '03', codBarraMedicamentos: 'AMJ456', nombreMedicamento: 'Acetaminofen', cantidadMedicamento: 10, precioMedicamento: 2000,idLaboratorio: 2, idDosificacion: 3},
-    {idMedicamento: 2, codigoCompraMedicamentos: '09', codBarraMedicamentos: '125TYU', nombreMedicamento: 'Paracetamol', cantidadMedicamento: 3, precioMedicamento: 1500,idLaboratorio: 3, idDosificacion: 2},
-    {idMedicamento: 3, codigoCompraMedicamentos: '154', codBarraMedicamentos: 'KOI74', nombreMedicamento: 'Ibuprofeno', cantidadMedicamento: 7, precioMedicamento: 1200,idLaboratorio: 2, idDosificacion: 1},
+    {idMedicamento: 1, codigoCompraMedicamentos: '03', codBarraMedicamentos: 'AMJ456', nombreMedicamento: 'Acetaminofen', cantidadMedicamento: 10, precioMedicamento: 2000,nomLaboratorio: 'Los angeles', nomDosificacion: 'Hydrogen'},
+    {idMedicamento: 2, codigoCompraMedicamentos: '09', codBarraMedicamentos: '125TYU', nombreMedicamento: 'Paracetamol', cantidadMedicamento: 3, precioMedicamento: 1500,nomLaboratorio: 'lorena vejarano', nomDosificacion: 'Hdro'},
+    {idMedicamento: 3, codigoCompraMedicamentos: '154', codBarraMedicamentos: 'KOI74', nombreMedicamento: 'Ibuprofeno', cantidadMedicamento: 7, precioMedicamento: 1200,nomLaboratorio: 'Hogen', nomDosificacion: 'Hogen'},
   ];
 
   constructor() { }
@@ -36,7 +36,7 @@ export class MedicamentosService {
         return medicamentos;
     }
   
-    editarLaboratorio(medicamentos: Medicamentos):Medicamentos{
+    editarMedicamentos(medicamentos: Medicamentos):Medicamentos{
       let indexMedicamentos = this.MedicamentosData.findIndex(item => item.idMedicamento == medicamentos.idMedicamento);
       Object.assign(this.MedicamentosData[indexMedicamentos], medicamentos);
       return medicamentos;

@@ -5,8 +5,8 @@ export class Medicamentos {
     nombreMedicamento!: string;
     cantidadMedicamento!: number;
     precioMedicamento!: number;
-    idLaboratorio!: number;
-    idDosificacion!: number;
+    nomLaboratorio!: string;
+    nomDosificacion!: string;
 
   
     public constructor(partial?: Partial<Medicamentos>) {

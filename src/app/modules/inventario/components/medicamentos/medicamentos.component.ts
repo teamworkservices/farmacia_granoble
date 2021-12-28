@@ -15,7 +15,7 @@ import { EditarMedicamentosComponent } from './editar-medicamentos/editar-medica
 export class MedicamentosComponent implements OnInit {
 
   MedicamentosData: Medicamentos[] = [];
-  displayedColumns: string[] = ['idM', 'codigoCM', 'codigoBM', 'nombreM', 'cantidadM', 'precioM','idL', 'idD','acciones'];
+  displayedColumns: string[] = ['idM', 'codigoCM', 'codigoBM', 'nombreM', 'cantidadM', 'precioM','nomL', 'nomD','acciones'];
 
   dataSource!: MatTableDataSource<Medicamentos>
 

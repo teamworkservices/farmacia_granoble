@@ -1,141 +1,92 @@
-<form [formGroup]="form" (ngSubmit)="agregarMedicamentos()">
-    <mat-grid-list cols="2" rowHeight="50px">
-              
-      <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-label>CODIGO DE COMPRA:</mat-label>
-      </mat-grid-tile>
-  
-      <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-form-field appearance="fill" >
-          <input 
-            matInput
-            #input
-            maxlength="20"
-            autocomplete="off"
-            formControlName="codigoCMCtrl"
-          />
-          
-        </mat-form-field>
-      </mat-grid-tile>
-
-      <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-label>CODIGO DE BARRAS:</mat-label>
-      </mat-grid-tile>
-  
-      <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-form-field appearance="fill" >
-          <input 
-            matInput
-            #input
-            maxlength="20"
-            autocomplete="off"
-            formControlName="codigoBMCtrl"
-          />
-          
-        </mat-form-field>
-      </mat-grid-tile>
+<form [formGroup]="form" (ngSubmit)="agregarMedicamento()">
+  <mat-grid-list cols="2" rowHeight="75px">
       
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-label>NOMBRE MEDICAMENTO:</mat-label>
-      </mat-grid-tile>
-  
-      <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-form-field appearance="fill" >
-          <input 
-            matInput
-            #input
-            maxlength="20"
-            autocomplete="off"
-            formControlName="nombreMCtrl"
-          />
-          
-        </mat-form-field>
+          <mat-label> NOMBRE MEDICAMENTO: </mat-label>
       </mat-grid-tile>
 
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-label>CANTIDAD MEDICAMENTO:</mat-label>
-      </mat-grid-tile>
-  
-      <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-form-field appearance="fill" hintLabel="Max 10 caracteres">
-          <input
-            matInput
-            #input
-            maxlength="10"
-            autocomplete="off"
-            formControlName="cantidadMCtrl"
-          />
-          <mat-hint align="end"> {{ input.value?.length || 0 }}/10</mat-hint>
-        </mat-form-field>
+          <mat-form-field appearance="fill" >
+              <input matInput #input maxlength="20" autocomplete="off" formControlName="nombreCtrl">
+          </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-label>PRECIO MEDICAMENTO:</mat-label>
+          <mat-label> LABORATORIO: </mat-label>
       </mat-grid-tile>
-  
+
+
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-form-field appearance="fill" hintLabel="Max 10 caracteres">
-          <input
-            matInput
-            #input
-            maxlength="10"
-            autocomplete="off"
-            formControlName="precioMCtrl"
-          />
-          <mat-hint align="end"> {{ input.value?.length || 0 }}/10</mat-hint>
-        </mat-form-field>
+          <mat-form-field appearance="fill">
+              <mat-select formControlName="laboratorioCtrl">
+                  <mat-option *ngFor="let laboratorio of laboratorios" [value]="laboratorio.nombre">
+                      {{laboratorio.nombre}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-label>ID LABORATORIO:</mat-label>
-      </mat-grid-tile>
-  
-      <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-form-field appearance="fill" hintLabel="Max 10 caracteres">
-          <input
-            matInput
-            #input
-            maxlength="10"
-            autocomplete="off"
-            formControlName="idLMCtrl"
-          />
-          <mat-hint align="end"> {{ input.value?.length || 0 }}/10</mat-hint>
-        </mat-form-field>
+          <mat-label> DOSIFICACION: </mat-label>
       </mat-grid-tile>
 
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-label>ID DOSIFICACION:</mat-label>
-      </mat-grid-tile>
-  
-      <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-form-field appearance="fill" hintLabel="Max 10 caracteres">
-          <input
-            matInput
-            #input
-            maxlength="10"
-            autocomplete="off"
-            formControlName="idDMCtrl"
-          />
-          <mat-hint align="end"> {{ input.value?.length || 0 }}/10</mat-hint>
-        </mat-form-field>
+          <mat-form-field appearance="fill">
+              <mat-select formControlName="dosificacionCtrl">
+                  <mat-option *ngFor="let dosificacion of dosificaciones" [value]="dosificacion.nombre">
+                      {{dosificacion.nombre}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
       </mat-grid-tile>
 
-<!--BOTON DE GUARDAR-->    
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-label> CODIGO COMPRA: </mat-label>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-form-field appearance="fill">
+              <input matInput #input maxlength="20" autocomplete="off" formControlName="codigoCompraCtrl">
+          </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-label> CODIGO BARRA: </mat-label>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-form-field appearance="fill">
+              <input matInput #input maxlength="20" autocomplete="off" formControlName="codigoBarraCtrl">
+          </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-label> CANTIDAD: </mat-label>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-form-field appearance="fill" >
+              <input matInput #input maxlength="20" autocomplete="off" formControlName="cantidadCtrl">
+          </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-label> PRECIO: </mat-label>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-form-field appearance="fill" >
+              <input matInput #input maxlength="20" autocomplete="off" formControlName="precioCtrl">
+          </mat-form-field>
+      </mat-grid-tile>        
+
       <mat-grid-tile [colspan]="2" [rowspan]="1">
-       <button [disabled]="form.invalid" color="primary" mat-button
+          <button [disabled]="form.invalid" color="primary" mat-button
               (click)="confirmModal()" mat-raised-button type="submit">
-          <mat-icon>save</mat-icon>
-          GUARDAR
-        </button>
+              <mat-icon>save</mat-icon>
+              GUARDAR
+          </button>
       </mat-grid-tile>
 
-    </mat-grid-list>
- </form>
-
-
-
-    
-   
-  
-   
-  
+  </mat-grid-list>
+</form>

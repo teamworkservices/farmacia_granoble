@@ -1,9 +1,13 @@
 import { group } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Dosificacion } from 'src/app/shared/models/dosificacion';
+import { Laboratorio } from 'src/app/shared/models/laboratorio';
 import { Medicamentos } from 'src/app/shared/models/medicamentos';
 import Swal from 'sweetalert2';
+import { DosificacionService } from '../../../services/dosificacion.service';
+import { LaboratorioService } from '../../../services/laboratorio.service';
 import { MedicamentosService } from '../../../services/medicamentos.service';
 
 @Component({
@@ -13,46 +17,64 @@ import { MedicamentosService } from '../../../services/medicamentos.service';
 })
 export class EditarMedicamentosComponent implements OnInit {
 
-  form: FormGroup;
-
-  constructor(private fb: FormBuilder, 
-              private medicamentosService: MedicamentosService,
-              public dialogRef: MatDialogRef<EditarMedicamentosComponent>) {
-
-    this.form = this.fb.group({
-      codigoCtrl: ['', [Validators.required, Validators.maxLength(10)]],
-      nombreCtrl: ['', [Validators.required, Validators.maxLength(20)]],
-    })
-  }
-
-  ngOnInit(): void {
-  }
-
-  editarMedicamentos(){
-    if (this.form.valid) {
-      let medicamentos = new Medicamentos();
-      medicamentos.idMedicamento= this.form.value['idMCtrl'];
-      medicamentos.codigoCompraMedicamentos= this.form.value['codigoCMCtrl'];
-      medicamentos.codBarraMedicamentos= this.form.value['codigoBMCtrl'];
-      medicamentos.nombreMedicamento= this.form.value['nombreMCtrl'];
-      medicamentos.cantidadMedicamento= this.form.value['cantidadMCtrl'];
-      medicamentos.precioMedicamento= this.form.value['precioMCtrl'];
-      medicamentos.idLaboratorio= this.form.value['idLMCtrl'];
-      medicamentos.idDosificacion= this.form.value['idDMCtrl'];
-
-      medicamentos = this.medicamentosService.agregarMedicamentos(medicamentos);
-      this.dialogRef.close(medicamentos);
+    form: FormGroup;
+    laboratorios: Laboratorio[];
+    dosificaciones: Dosificacion[];
+  
+    constructor(private fb: FormBuilder, 
+                private medicamentoService: MedicamentosService,
+                public dialogRef: MatDialogRef<EditarMedicamentosComponent>,
+                private laboratorioService: LaboratorioService,
+                private dosificacionService: DosificacionService,
+                @Inject(MAT_DIALOG_DATA) public data: Medicamentos) {
+  
+                  this.dosificaciones = this.dosificacionService.getDosificaciones();
+                  this.laboratorios = this.laboratorioService.listarLaboratorios();          
+      this.form = this.fb.group({
+        codigoCompraCtrl: [data.codigoCompraMedicamentos, [Validators.required, Validators.maxLength(20)]],
+        codigoBarraCtrl: [data.codBarraMedicamentos, [Validators.required, Validators.maxLength(20)]],
+        nombreCtrl: [data.nombreMedicamento, [Validators.required, Validators.maxLength(20)]],
+        cantidadCtrl: [data.cantidadMedicamento, [Validators.required, Validators.maxLength(20)]],
+        precioCtrl: [data.precioMedicamento, [Validators.required, Validators.maxLength(20)]],
+        laboratorioCtrl: [data.nomLaboratorio, [Validators.required, Validators.maxLength(20)]],
+        dosificacionCtrl: [data.nomDosificacion, [Validators.required, Validators.maxLength(20)]],
+       
+        
+        
+      })
     }
+  
+    ngOnInit(): void {
+    }
+  
+    editarMedicamento(){
+      if (this.form.valid) {
+        let varMedicamento = new Medicamentos();
+        varMedicamento.idMedicamento = this.data.idMedicamento;
+        varMedicamento.codigoCompraMedicamentos = this.form.value['codigoCompraCtrl'];
+        varMedicamento.codBarraMedicamentos = this.form.value['codigoBarraCtrl'];
+        varMedicamento.nombreMedicamento = this.form.value['nombreCtrl'];
+        varMedicamento.cantidadMedicamento = this.form.value['cantidadCtrl'];
+        varMedicamento.precioMedicamento = this.form.value['precioCtrl'];
+        varMedicamento.nomLaboratorio = this.form.value['laboratorioCtrl'];
+        varMedicamento.nomDosificacion = this.form.value['dosificacionCtrl'];
+  
+        Object.assign(varMedicamento, this.medicamentoService.editarMedicamentos(varMedicamento));
+        this.dialogRef.close(varMedicamento);
+      }
+    }
+  
+    confirmModal(){
+      Swal.fire({
+        title: 'Correcto',
+        text: 'Medicamento actualizada exitosamente!',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000
+      })
+    }
+  
   }
 
-  confirmModal(){
-    Swal.fire({
-      title: 'Correcto',
-      text: 'Medicamento actualizado exitosamente!',
-      icon: 'success',
-      showConfirmButton: false,
-      timer: 2000
-    })
-  }
 
-}
+  
