@@ -13,11 +13,16 @@ import { MatInputModule } from "@angular/material/input";
 
 import { MatSelectModule} from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { BuscadorDosificacionComponent } from './components/buscador-dosificacion/buscador-dosificacion.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
+//import { BuscadorDosificacionComponent } from './components/buscador-dosificacion/buscador-dosificacion.component';
 
 
 @NgModule({
   declarations: [
+    [BuscadorDosificacionComponent],
+  
     
   ],
   imports: [
@@ -33,7 +38,9 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    MatAutocompleteModule
     
 
   ],
@@ -49,7 +56,10 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    BuscadorDosificacionComponent,
   ]
 })
 export class SharedModule { }
